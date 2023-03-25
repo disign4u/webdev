@@ -1,0 +1,70 @@
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiGyp8kv8JHgFVrLPTedw.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrFJA.ttf) format('truetype');
+}
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #1c2841;
+  color: #fafafa;
+}
+section {
+  margin: 1rem;
+}
+#sec1 {
+  display: flex;
+  flex-direction: column;
+}
+#sec1 .boxes {
+  display: flex;
+  gap: 1rem;
+}
+#sec1 .boxes:hover > :not(:hover) {
+  opacity: 0.2;
+}
+#sec1 .boxes .box {
+  width: 3rem;
+  height: 3rem;
+  background-color: lightblue;
+  border-radius: 4px;
+  transition: 150ms;
+}
+#sec2 .basis {
+  display: inline-block;
+  position: relative;
+  color: yellow;
+}
+#sec2 .basis:hover .tip {
+  opacity: 1;
+}
+#sec2 .basis .tip {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  pointer-events: none;
+  background-color: orange;
+  border-radius: 4px;
+  transition: all 150ms;
+  opacity: 0;
+  padding: 4px 10px;
+}
