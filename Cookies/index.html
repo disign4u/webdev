@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookies</title>
+    <link type="text/css" rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+    Das => Cookie Tier <br />
+    https://webrewrite.com/store-array-values-cookie/#:~:text=Cookies%20can%20only%20store%20string,array%20directly%20into%20a%20cookie.<br>
+    Set-Cookie: mykey=myvalue; SameSite=Strict<br />
+    https://plantpot.works/4418<br/>
+    https://www.youtube.com/watch?v=A-jk8jOP1M4
+    <ul>
+        <li>
+            <button class="btn" data-remeber="hp11">11</button>
+        </li>
+        <li>
+            <button class="btn" data-remeber="hp22">22</button>
+        </li>
+        <li>
+            <button class="btn" data-remeber="hp33">33</button>
+        </li>
+        <li>
+            <button class="btn" data-remeber="hp22">44</button>
+        </li>
+    </ul>
+    <button id="ajaxButton" type="button">Make a request</button>
+
+<script>
+  (() => {
+    let httpRequest;
+    document
+      .getElementById("ajaxButton")
+      .addEventListener("click", makeRequest);
+
+    function makeRequest() {
+      httpRequest = new XMLHttpRequest();
+
+      if (!httpRequest) {
+        alert("Giving up :( Cannot create an XMLHTTP instance");
+        return false;
+      }
+      httpRequest.onreadystatechange = alertContents;
+      httpRequest.open("GET", "test.html");
+      httpRequest.send();
+    }
+
+    function alertContents() {
+      if (httpRequest.readyState === XMLHttpRequest.DONE) {
+        if (httpRequest.status === 200) {
+          alert(httpRequest.responseText);
+        } else {
+          alert("There was a problem with the request.");
+        }
+      }
+    }
+  })();
+</script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="jquery.cookie.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+    <script>
+        const httpRequest = new XMLHttpRequest();
+        httpRequest.onreadystatechange = (e)=> {
+            console.log(e);
+        };
+        httpRequest.open("GET", "http://www.example.org/some.file", true);
+        httpRequest.send();
+
+        const setCookieJ = (name, json) => {
+            let cookieValue = '';
+            let expire = '';
+            let period = '';
+            //Specify the cookie name and value
+            cookieValue = name + '=' + JSON.stringify(json) + ';';
+            //Specify the path to set the cookie
+            cookieValue += 'path=/ ;';
+            //Specify how long you want to keep cookie
+            period = 30; //days to store
+            expire = new Date();
+            expire.setTime(expire.getTime() + 1000 * 3600 * 24 * period);
+            expire.toUTCString();
+            cookieValue += 'expires=' + expire + ';';
+            //Set cookie
+            document.cookie = cookieValue;
+        };
+
+        const json = {
+            name: 'Plantpot',
+            address: 'Tokyo',
+            age: '99',
+            email: 'xxx@example.com'
+        };
+
+
+        setCookieJ('user', json);
+        const array = [0, 1, 2, 3];
+        setCookieJ('numbers', array);
+
+        const getCookieJ = (name) => {
+
+            let cookieValue = '';
+            let cookieArray = new Array();
+            let result = new Array();
+
+            //Get cookie
+            cookieValue = document.cookie;
+
+            //Divide the cookie into an array and convert them to JSON
+            if (cookieValue) {
+                cookieArray = cookieValue.split(';');
+
+                cookieArray.forEach(data => {
+                    data = data.split('=');
+
+                    //data[0]: Cookie name
+                    //data[1]: Cookie value
+                    //console.log(data[0].trim());
+                
+                    result[data[0]] = JSON.parse(data[1]);
+                   
+                });
+            }
+
+            return result;
+        }
+        
+        console.log(getCookieJ('numbers'));
+        
+
+        $(document).ready(function () {
+           
+
+        });
+
+        function setCookie(name, value, exp_days) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exp_days * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toGMTString();
+            document.cookie = name + "=" + value + ";" + expires + ";path=/";
+        }
+
+        function getCookie(name) {
+            var cname = name + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(cname) == 0) {
+                    return c.substring(cname.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function deleteCookie(name) {
+            var d = new Date();
+            d.setTime(d.getTime() - (60 * 60 * 1000));
+            var expires = "expires=" + d.toGMTString();
+            document.cookie = name + "=;" + expires + ";path=/";
+        }
+    </script>
+</body>
+
+</html>
