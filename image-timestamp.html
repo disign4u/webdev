@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>JavaScript</title>
+</head>
+<body>
+    <a id="webcamContainer"></a>
+    <script>
+        var container = document.getElementById('webcamContainer');
+        var webcamImage = new Image(700, 562);
+        webcamImage.src = 'https://www.parkhotel-burgmuehle.de/static/webcam/webcam/current.jpg?t=' + Math.random(1);
+        webcamImage.alt = "Live Webcam Gorfion Malbunn";
+        webcamImage.setAttribute("style", "transform: none;");
+        container.classList.add("fancybox-thumb");
+        container.setAttribute("href", "https://www.parkhotel-burgmuehle.de/static/webcam/webcam/current.jpg?t=" + Math.random(1));
+        container.setAttribute("data-fancybox-thumb", "https://www.parkhotel-burgmuehle.de/static/webcam/webcam/current.jpg");
+        container.setAttribute("data-fancybox-type", "image");
+        container.setAttribute("data-fancybox-group", "image-webcam");
+        container.setAttribute("data-caption", "Hauseigene Webcam Parkhotel Burgmühle");
+        container.setAttribute("data-fancybox-width", "1280");
+        container.setAttribute("data-fancybox-height", "960");
+        container.setAttribute("style", "cursor: pointer;");
+        container.append(webcamImage);
+    </script>
+    <noscript>
+        <img src="https://www.parkhotel-burgmuehle.de/static/webcam/webcam/current.jpg"
+             alt="Hauseigene Webcam Parkhotel Burgmühle"/>
+    </noscript>
+</body>
+</html>
