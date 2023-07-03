@@ -1,0 +1,428 @@
+/*font-family: 'Lora', serif;
+font-family: 'Roboto', sans-serif;*/
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Roboto&display=swap');
+@import "header.less";
+html, body {
+
+	font-family: 'Roboto', sans-serif;
+	padding: 5rem;
+}
+
+/**
+VERTICAL SCROLLING
+*/
+@keyframes vista-zoom {
+	0% {
+		transform: scale(1)
+	}
+	100% {
+		transform: scale(1.1)
+	}
+}
+
+@keyframes loader-spinning {
+	0% {
+		transform: rotate(0deg)
+	}
+	100% {
+		transform: rotate(360deg)
+	}
+}
+
+@keyframes loader-blink {
+	0% {
+		opacity: 0
+	}
+	50% {
+		opacity: 1
+	}
+	100% {
+		opacity: 0
+	}
+}
+
+.grp-layout-verticalscroll {
+	.wrapper {
+		outline: 1px solid red;
+		position: relative;
+		margin:2rem;
+		display: flex;
+		gap:2rem;
+		.images , .items {
+			flex: 1 1 50%;
+			position: relative;
+			outline: 1px solid red;
+		}
+		.image {
+			position: sticky;
+			top: 0;
+			width: 50%;
+			height: 100vh
+		}
+		.items {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			pointer-events: none;
+			outline: 1px solid red;
+		}
+	}
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__wrap {
+	position: relative
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__items {
+	position: relative
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__effect {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__effect-container {
+	position: sticky;
+	top: 0;
+	width: 50%;
+	height: 100vh
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__effect-container > div {
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	transform: translateY(-50%);
+	opacity: 0;
+	transition: opacity .5s
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__effect-container > div.js-act > div > span {
+	margin-left: 0;
+	transition: margin-left .5s
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__effect-container > div > div:first-of-type {
+	margin-bottom: 7em
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__effect-container > div.js-act {
+	opacity: 1;
+	transition: opacity .5s
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__item-wrapper {
+	display: flex;
+	padding: 9.5em 0 7.4em 0;
+	position: relative;
+	max-width: 192em;
+	margin: 0 auto;
+	min-height: 100vh;
+	align-items: center
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__item.JS-transparent {
+	background: transparent !important;
+	transition: background 1.5s
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__item:hover .DNA-module__right-content {
+	background: #fff;
+	transition: background .5s
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__waypoint {
+	position: absolute;
+	top: 50vh;
+	width: 100%;
+	height: 1px
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__left {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	margin: 7em 0 2em 0;
+	opacity: 0
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__left-text {
+	display: flex;
+	flex-direction: column;
+	align-items: center
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__left-text > span {
+	font-size: 11.4em;
+	line-height: 1;
+	text-transform: uppercase;
+	font-family: "EB Garamond", serif
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__left-pagination {
+	display: flex;
+	flex-direction: column;
+	align-items: center
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__left-pagination > span {
+	font-size: 7em;
+	line-height: 1;
+	font-family: "EB Garamond", serif;
+	margin-left: 30px;
+	transition: margin-left .5s
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__left-pagination > span:last-of-type {
+	color: #b7a99b;
+	margin-left: 0
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__right {
+	width: 50%
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__right-image img {
+	width: 100%;
+	height: auto
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__right-content {
+	display: flex;
+	padding: 6em 14% 6em 8%;
+	background: transparent;
+	transition: background .5s
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__right-pagination {
+	display: none
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__headlines {
+	text-align: left;
+	padding-bottom: 0
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__headlines > * {
+	color: #42454a
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__info {
+	max-width: 37em;
+	margin-left: 12%
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__info-link {
+	margin-top: 2.5em
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__info-link > span, .DNA-module[data-id=verticalslider] .DNA-module__info-link > a {
+	font-size: 1.6em;
+	color: #42454a;
+	text-transform: uppercase;
+	font-weight: 700;
+	cursor: pointer
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__info-link > span:hover, .DNA-module[data-id=verticalslider] .DNA-module__info-link > a:hover {
+	color: #b7a99b
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__info-link > span:after, .DNA-module[data-id=verticalslider] .DNA-module__info-link > span:before, .DNA-module[data-id=verticalslider] .DNA-module__info-link > a:after, .DNA-module[data-id=verticalslider] .DNA-module__info-link > a:before {
+	content: "/"
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__info-link > span:before, .DNA-module[data-id=verticalslider] .DNA-module__info-link > a:before {
+	margin-right: 1em
+}
+
+.DNA-module[data-id=verticalslider] .DNA-module__info-link > span:after, .DNA-module[data-id=verticalslider] .DNA-module__info-link > a:after {
+	margin-left: 1em
+}
+
+@media (max-width: 767px) {
+	.DNA-module[data-id=verticalslider] .DNA-module__info-link > a {
+		font-size: 1.2em
+	}
+}
+
+@media (min-width: 1921px) {
+	.DNA-module[data-id=verticalslider] .DNA-module__item-wrapper {
+		min-height: auto
+	}
+}
+
+@media (max-width: 1024px) {
+	.DNA-module[data-id=verticalslider] .DNA-module__item-wrapper {
+		padding: 0;
+		flex-direction: column;
+		min-height: auto
+	}
+
+	.DNA-module[data-id=verticalslider] .DNA-module__effect {
+		display: none
+	}
+
+	.DNA-module[data-id=verticalslider] .DNA-module__left {
+		width: 100%;
+		margin: 6.5em 0 4em 0;
+		opacity: 1
+	}
+
+	.DNA-module[data-id=verticalslider] .DNA-module__left-text > span {
+		font-size: 4.6em
+	}
+
+	.DNA-module[data-id=verticalslider] .DNA-module__left-pagination {
+		display: none
+	}
+
+	.DNA-module[data-id=verticalslider] .DNA-module__right {
+		width: 100%;
+		position: relative;
+		background: none
+	}
+
+	.DNA-module[data-id=verticalslider] .DNA-module__right-content {
+		padding: 0 12em;
+		flex-direction: column;
+		align-items: center;
+		margin: 6em 0;
+		background: none !important
+	}
+
+	.DNA-module[data-id=verticalslider] .DNA-module__right-pagination {
+		position: absolute;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		display: flex;
+		flex-direction: column
+	}
+
+	.DNA-module[data-id=verticalslider] .DNA-module__right-pagination > span {
+		font-size: 3.1em;
+		line-height: 1;
+		font-family: "EB Garamond", serif;
+		color: #fff
+	}
+
+	.DNA-module[data-id=verticalslider] .DNA-module__right-pagination > span:last-of-type {
+		color: rgba(255, 255, 255, .5)
+	}
+
+	.DNA-module[data-id=verticalslider] .DNA-module__headlines {
+		padding-bottom: 3.5em
+	}
+
+	.DNA-module[data-id=verticalslider] .DNA-module__info {
+		max-width: none;
+		margin-left: 0;
+		text-align: center
+	}
+}
+
+@media (max-width: 767px) {
+	.DNA-module[data-id=verticalslider] .DNA-module__left {
+		margin: 4em 0
+	}
+
+	.DNA-module[data-id=verticalslider] .DNA-module__right-content {
+		padding: 0 4em;
+		margin: 3.8em 0 6em 0
+	}
+
+	.DNA-module[data-id=verticalslider] .DNA-module__headlines {
+		text-align: center
+	}
+}
+
+h1, h2, h3, h4, h5 {
+	font-family: 'Lora', serif;
+}
+
+.grp {
+	outline: 1px solid;
+	min-height: 25vh;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+.srolling {
+	display: grid;
+	grid-template-columns: 60fr 40fr;
+	gap: 2rem;
+
+	.gallery-img {
+		width: 60%;
+	}
+
+	.gallery-nav {
+		position: sticky;
+		top: 40px;
+		width: 40%;
+	}
+
+	div {
+		outline: 1px solid red;
+	}
+}
+
+.gallery-scroller {
+	.item {
+		outline: 1px solid red;
+		display: grid;
+		grid-template-columns: 2fr 1fr;
+		grid-template-rows: 2fr 1fr;
+
+		&-img {
+			//aspect-ratio: 1040 ~'/' 562;
+			position: relative;
+
+			img {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				object-fit: cover;
+			}
+		}
+
+		&-actions {
+			grid-row: span 2;
+			padding: 40px 10%;
+			display: flex;
+			flex-direction: column;
+			gap: 1rem 0;
+
+			.sticky {
+				position: sticky;
+				top: 40px;
+			}
+		}
+
+		&-txt {
+			//grid-column: 1 ~'/' -1;
+			padding: 40px 20% 40px 30%;
+		}
+	}
+
+	div {
+		outline: 1px solid red;
+	}
+}
