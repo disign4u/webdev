@@ -5,18 +5,50 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Temp...</title>
-    <link type="text/css" rel="stylesheet" href="index.css">
+
+    <style>
+        .container {
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1rem;
+        }
+        .card {
+            margin: 25vh 0;
+            opacity: 1;
+            transform: translate(0);
+            background-color: aliceblue;
+            border: 1px solid black;
+            border-radius: .25rem;
+            transition: 150ms;
+            padding:25vh 2rem;
+            display: block;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+        .card.active {
+            border:2px solid red;
+        }
+        .card.active.fix {
+            position: fixed;
+        }
+
+    </style>
 </head>
 <body>
     <ul>
-        <li>https://www.mediaevent.de/javascript/intersection-observer.html</li>
+        <li>
+            <a href="https://www.mediaevent.de/javascript/intersection-observer.html</li>
+       " target="_blank">
+                mediaevent
+            </a>
         <li>https://www.youtube.com/watch?v=2IbRtjez6ag</li>
         <li>https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
         </li>
     </ul>
-    
+
     <div class="container">
-        <div class="card show">TypeCard</div>
         <div class="card">TypeCard</div>
         <div class="card">TypeCard</div>
         <div class="card">TypeCard</div>
@@ -25,10 +57,51 @@
         <div class="card">TypeCard</div>
         <div class="card">TypeCard</div>
         <div class="card">TypeCard</div>
-        <div class="card">LastCard</div>   
+        <div class="card">TypeCard</div>
+        <div class="card">LastCard</div>
     </div>
     <div class="info">
     </div>
     <script src="main.js"></script>
+    <script>
+
+        const generateSteps = ()=>{
+            const steps = [];
+            for (let i = 1; i <= 101; i++) {
+                steps.push((i - 1) / 100);
+            }
+            return steps
+        }
+        const isTrigger = (element,className)=>{
+            return element.classList.contains(className);
+        }
+        const rootConfig = {
+            root: null,
+            rootMargin: '0px 0px',
+            threshold: generateSteps()
+        };
+        const Cards = document.querySelectorAll('.card');
+        const cardObserver = new IntersectionObserver (function (entries, observer) {
+            entries.forEach(function(entry) {
+                //console.log(entry)
+
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
+                    if(entry.boundingClientRect.top < 0) {
+                        entry.target.classList.add("fix");
+                    }
+                } else {
+                    entry.target.classList.remove("active");
+                    entry.target.classList.remove("fix");
+                }
+                let y = window.innerHeight;
+                console.log(y, entry.boundingClientRect.top);
+            });
+        }, rootConfig);
+
+        Cards.forEach((card)=>{
+            cardObserver.observe(card);
+        });
+    </script>
 </body>
 </html>
