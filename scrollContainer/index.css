@@ -491,6 +491,33 @@ body {
   font-family: 'Roboto', sans-serif;
   padding: 5rem;
 }
+.container {
+  position: relative;
+  height: 150px;
+}
+svg {
+  display: block;
+  position: absolute;
+}
+.circle {
+  height: 10px;
+  width: 10px;
+  position: absolute;
+  top: 12.5px;
+  left: 12.5px;
+  background-color: #f90;
+  border-radius: 50%;
+  display: block;
+  offset-path: path("M7 53 2 23C1 11 10-1 22 0c14 1 29 20 35 31l22 57 7 10c3 3 33 27 39 10 10-24 5-57 6-81 1-7-2-18 4-20l3-4c42-11 52 40 63 67 10 23 31 26 45 5l1-6");
+}
+#butterfly1 {
+  position: absolute;
+  transform-origin: center;
+  height: 38px;
+  width: 38px;
+  outline: 10px solid green;
+  offset-path: path("M142.616,36.305c-0,-0 0.486,8.462 9.759,8.657c9.273,0.195 12.586,0.039 16.847,5.263c6.115,7.497 -2.78,16.175 -2.78,16.175");
+}
 /**
 VERTICAL SCROLLING
 */
