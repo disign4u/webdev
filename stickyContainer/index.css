@@ -1,0 +1,26 @@
+/*font-family: 'Lora', serif;
+font-family: 'Roboto', sans-serif;*/
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lora/v32/0QI6MX1D_JOuGQbT0gvTJPa787weuyJG.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Me5Q.ttf) format('truetype');
+}
+html,
+body {
+  font-family: 'Roboto', sans-serif;
+  padding: 5rem;
+}
+.container {
+  position: relative;
+  height: 150px;
+}
+/*# sourceMappingURL=index.css.map */
