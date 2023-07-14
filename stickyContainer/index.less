@@ -5,10 +5,84 @@ font-family: 'Roboto', sans-serif;*/
 html, body {
 
 	font-family: 'Roboto', sans-serif;
-	padding: 5rem;
+	padding: 0;
 }
 
-.container {
-	position: relative;
-	height: 150px;
+header, footer {
+	height: 50vh;
+	background: #f1f1f1
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+.grp-layout-verticalscroll {
+
+}
+
+.items {
+	height: 100%;
+	width:60%;
+	.item {
+		display: flex;
+		gap: 2rem;
+		height: 100vh;
+		width:100%;
+		position: relative;
+		.image {
+			position: relative;
+			/* nur für die animation */
+			&::after {
+				content: '';
+				display: block;
+				height: 3px;
+				width:100vh;
+				top:50%;
+				left:100%;
+				background-color: red;
+				position: absolute;
+				z-index: 2;
+			}
+		}
+		&-left {
+			width:100%;
+			position: relative;
+
+		}
+		&-right {
+			width:50%;
+			display: none;
+		}
+
+	}
+}
+.wrapper {
+	display: flex;
+	height: 100%;
+	overflow: visible;
+	width: 100%;
+}
+
+.sticky {
+	position: sticky;
+	top: 80px;
+	align-self: flex-start;
+	background-color: #aaa;
+	height: ~'calc(100vh - 80px)';
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 40%;
+	> div {
+		display: none;
+		opacity: 0;
+	}
+	.active {
+		display: block;
+		opacity: 1;
+		transition: opacity 0.5s ease-in-out;
+	}
 }
