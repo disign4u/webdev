@@ -15,7 +15,6 @@
             margin: 1rem;
         }
         .card {
-            margin: 25vh 0;
             opacity: 1;
             transform: translate(0);
             background-color: aliceblue;
@@ -24,16 +23,19 @@
             transition: 150ms;
             padding:25vh 2rem;
             display: block;
-            height: 100vh;
+            height: 75vh;
+            width:100%;
             box-sizing: border-box;
         }
         .card.active {
-            border:2px solid red;
+            border-color:green;
         }
-        .card.active.fix {
-            position: fixed;
+        body {
+            background-color: lightgrey;
         }
-
+        body.light {
+            background-color: yellow;
+        }
     </style>
 </head>
 <body>
@@ -49,10 +51,10 @@
     </ul>
 
     <div class="container">
+        <div class="card light">TypeCard</div>
         <div class="card">TypeCard</div>
         <div class="card">TypeCard</div>
-        <div class="card">TypeCard</div>
-        <div class="card">TypeCard</div>
+        <div class="card light">TypeCard</div>
         <div class="card">TypeCard</div>
         <div class="card">TypeCard</div>
         <div class="card">TypeCard</div>
@@ -60,11 +62,11 @@
         <div class="card">TypeCard</div>
         <div class="card">LastCard</div>
     </div>
-    <div class="info">
-    </div>
-    <script src="main.js"></script>
-    <script>
+    <footer class="light">
 
+    </footer>
+
+    <script>
         const generateSteps = ()=>{
             const steps = [];
             for (let i = 1; i <= 101; i++) {
@@ -80,11 +82,17 @@
             rootMargin: '0px 0px',
             threshold: generateSteps()
         };
-        const Cards = document.querySelectorAll('.card');
+        const Cards = document.querySelectorAll('.light');
         const cardObserver = new IntersectionObserver (function (entries, observer) {
             entries.forEach(function(entry) {
-                //console.log(entry)
-
+                console.clear();
+                console.log(entry.intersectionRatio);
+                if (entry.isIntersecting) {
+                    document.body.classList.add('light');
+                } else {
+                    document.body.classList.remove('light');
+                };
+                /**
                 if (entry.isIntersecting) {
                     entry.target.classList.add("active");
                     if(entry.boundingClientRect.top < 0) {
@@ -94,8 +102,10 @@
                     entry.target.classList.remove("active");
                     entry.target.classList.remove("fix");
                 }
-                let y = window.innerHeight;
-                console.log(y, entry.boundingClientRect.top);
+                 let y = window.innerHeight;
+                 console.log(y, entry.boundingClientRect.top);
+                 **/
+
             });
         }, rootConfig);
 

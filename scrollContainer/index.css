@@ -497,7 +497,6 @@ body {
 }
 svg {
   display: block;
-  position: absolute;
 }
 .circle {
   height: 10px;
