@@ -1,3 +1,52 @@
 html,body {
+  background: lightgray;
+  font-family: Arial, sans-serif;
+}
 
+header, footer {
+  min-height: 25vh;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.grp {
+  min-height: 75vh;
+  background: lightblue;
+  position: relative;
+  display: block;
+  margin: 1rem auto;
+  &.active {
+    outline: 3px solid green;
+  }
+  .info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: lightcoral;
+    width: 320px;
+    padding:20px;
+    color: #fff;
+  }
+  &-mem {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    background: white;
+    width: 320px;
+    padding:20px;
+    transform: translate(-50%, 0);
+    color: #aaa;
+  }
+  .anime {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    background: white;
+    width: 320px;
+    padding:20px;
+    color: #aaa;
+  }
 }
