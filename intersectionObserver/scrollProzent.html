@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>scroll Prozent</title>
+    <link rel="stylesheet" href="index.css" type="text/css" media="screen"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<header>
+    <h1>Scroll Prozent</h1>
+    <div id="progress">0%</div>
+</header>
+<section class="grp">
+    <div class="info">Info</div>
+    <div class="anime">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur autem corporis dignissimos eligendi
+    </div>
+</section>
+<section class="grp" id="example">
+    <div class="info">Info</div>
+    <div class="grp-mem">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur autem corporis dignissimos eligendi ex
+        exercitationem non numquam obcaecati rerum saepe. Cupiditate ipsa ipsum mollitia nobis nostrum perspiciatis
+        quibusdam quod unde. A accusamus aperiam atque consectetur cum cumque dolores eum ipsam magnam, nisi quo
+        recusandae reiciendis saepe suscipit ullam velit veniam.
+    </div>
+</section>
+<section class="grp">
+    <div class="info">Info</div>
+</section>
+<footer>
+    <p>Footer</p>
+</footer>
+<script>
+    const progress = document.getElementById('progress');
+    const totalHeight = document.body.scrollHeight - window.innerHeight;
+    window.onscroll = function () {
+        const progressHeight = (window.pageYOffset / totalHeight) * 100;
+        progress.innerHTML = Math.floor(progressHeight) + "%";
+        //progress.style.height = progressHeight + "%";
+        console.log(window.pageYOffset);
+        console.log(window.document.boundingClientRect);
+    }
+
+    const generateSteps = () => {
+        const steps = [];
+        for (let i = 1; i <= 101; i++) {
+            steps.push((i - 1) / 100);
+        }
+        return steps
+    }
+    const isTrigger = (element, className) => {
+        return element.classList.contains(className);
+    }
+    const generateInfo = (entry) => {
+        // Berechnen Sie den Prozentsatz des sichtbaren Bereichs, der gescrollt wurde.
+        const percentage = (entry.intersectionRect.height / document.documentElement.clientHeight) * 100;
+
+        let info = entry.target.querySelector('.info')
+
+        let infoText = `isIntersecting: ${entry.isIntersecting}`+
+            `<br> Höhe des Viewports: ${document.documentElement.clientHeight}`+
+            `<br>top: ${entry.boundingClientRect.top}`+
+            `<br> Prozent: ${percentage.toFixed(2)}%`;
+        info.innerHTML = infoText;
+    }
+    const rootConfig = {
+        root: null,
+        rootMargin: '0px 0px',
+        threshold: generateSteps()
+    };
+
+    const Cards = document.querySelectorAll('.grp');
+    const cardObserver = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+            generateInfo(entry);
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            } else {
+                entry.target.classList.remove('active');
+            };
+            //console.log(entry)
+        });
+    }, rootConfig);
+
+    Cards.forEach((card) => {
+        cardObserver.observe(card);
+    });
+
+    const animation = anime({
+        targets: '.anime',
+        translateX: 500,
+        rotate: '1turn',
+        backgroundColor: '#FFF',
+        duration: 8000,
+        autoplay: true
+    });
+/*
+    animation.seek((scrollPercent / 100) * animation.duration);
+    var seekProgressEl = document.querySelector('.seek-anim-demo .progress');
+    seekProgressEl.oninput = function() {
+        animation.seek(animation.duration * (seekProgressEl.value / 100));
+    };*/
+</script>
+</body>
+</html>
