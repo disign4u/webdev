@@ -85,7 +85,7 @@
         const Cards = document.querySelectorAll('.light');
         const cardObserver = new IntersectionObserver (function (entries, observer) {
             entries.forEach(function(entry) {
-                console.clear();
+
                 console.log(entry.intersectionRatio);
                 if (entry.isIntersecting) {
                     document.body.classList.add('light');

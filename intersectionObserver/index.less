@@ -11,14 +11,90 @@ header, footer {
   align-items: center;
   flex-direction: column;
 }
+
+#example {
+  position: relative;
+  z-index: 10;
+  height: auto;
+  min-height: 50vh;
+}
+#box-top {
+  position: absolute;
+  z-index: 10;
+  left:0;
+  top:0;
+  width: 200px;
+  height: 20px;
+  background: black;
+  border-radius: 0 0 10px 0;
+  font-size: 14px;
+  color: yellow;
+  display: inline-flex;
+  align-items: center;
+  padding:0 10px;
+}
+
+#box-bottom {
+  position: absolute;
+  z-index: 10;
+  right:0;
+  bottom:0;
+  width: 200px;
+  height: 20px;
+  background: black;
+  border-radius: 10px 0 0 0;
+  font-size: 14px;
+  color: yellow;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding:0 10px;
+}
+#box-mitte {
+  position: absolute;
+  z-index: 10;
+  left:50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 20px;
+  background: black;
+  border-radius: 5px;
+  font-size: 14px;
+  color: yellow;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding:0 10px;
+}
+nav {
+  position: fixed;
+  z-index: 20;
+  left:0;
+  bottom:0;
+  width: 10px;
+  height: 100vh;
+  background: orange;
+}
 .grp {
-  min-height: 75vh;
+  height: 75vh;
   background: lightblue;
   position: relative;
   display: block;
   margin: 1rem auto;
+  max-width: 100vw;
   &.active {
-    outline: 3px solid green;
+    background: lightgreen;
+  }
+  .output {
+    position: absolute;
+    z-index: 999;
+    bottom: 20px;
+    left: 0;
+    color: #fff;
+    font-size: 2rem;
+    width: 200px;
+    height: 100px;
   }
   .info {
     position: absolute;
@@ -28,6 +104,19 @@ header, footer {
     width: 320px;
     padding:20px;
     color: #fff;
+    &-bottom, &-top {
+      position: absolute;
+      z-index: 10;
+      left: 50%;
+      border-left:2px solid red;
+      height: 200vh;
+    }
+    &-bottom {
+      top:100%;
+    }
+    &-top {
+      bottom: 100%
+    }
   }
   &-mem {
     position: absolute;
