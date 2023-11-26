@@ -47,10 +47,20 @@
     window.onscroll = function () {
         const progressHeight = (window.pageYOffset / totalHeight) * 100;
         progress.innerHTML = Math.floor(progressHeight) + "%";
+
         const boxTop = document.getElementById('box-top');
-        boxTop.innerHTML = "Top: " + Math.floor(box.getBoundingClientRect().top ,2) + " Weite: " + box.getBoundingClientRect().width ;
+        boxTop.innerHTML = "Top: " + Math.floor(box.getBoundingClientRect().top ,2)
+            + " Weite: " + box.getBoundingClientRect().width ;
+
         const boxBottom = document.getElementById('box-bottom');
         boxBottom.innerHTML = "Unten: " + Math.floor(box.getBoundingClientRect().bottom, 2 ) + " Höhe: " + box.getBoundingClientRect().height;
+
+        // wen top kleiner ist als die gesamthöhe minus der box höhe, dann ist die box komplett im viewport ausser box bottom ist kleiner gleich als 0
+
+        let ganz = (box.getBoundingClientRect().top - (window.innerHeight - box.getBoundingClientRect().height)<0) && ( box.getBoundingClientRect().top >= 0)
+        let test = ganz ? "ganz" : "nicht ganz";
+        const boxMitte = document.getElementById('box-mitte');
+        boxMitte.innerHTML = `sichtbare ${test}`;
     }
 
     const generateSteps = () => {
@@ -66,11 +76,11 @@
     const generateInfo = (entry) => {
         // Berechnen Sie den Prozentsatz des sichtbaren Bereichs, der gescrollt wurde.
         const percentage = (entry.intersectionRect.height / document.documentElement.clientHeight) * 100;
-
+        const progressHeight = (window.pageYOffset / totalHeight) * 100;
         let info = entry.target.querySelector('.info')
 
         let infoText = `isIntersecting: ${entry.isIntersecting}`+
-            `<br> Höhe Viewport: ${document.documentElement.clientHeight}`+
+            `<br> Gesamt: ${Math.floor(progressHeight,2)}`+`<br> Höhe Viewport: ${document.documentElement.clientHeight}`+
             `<br> Höhe Section: ${entry.boundingClientRect.height}`+
             `<br>top: ${entry.boundingClientRect.top}`+
             `<br> Prozent: ${percentage.toFixed(2)}%`;
