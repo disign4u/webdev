@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>scroll Prozent</title>
     <link rel="stylesheet" href="index.css" type="text/css" media="screen"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
+            integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
 <header>
@@ -17,7 +19,11 @@
 <section class="grp">
     <div class="info">Info</div>
     <div class="anime">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur autem corporis dignissimos eligendi
+        <ol>
+            <li>
+                Erst wen das Element komplett im Viewport ist, wird das Element animiert.
+            </li>
+        </ol>
     </div>
 </section>
 <section class="grp video" id="example">
@@ -26,17 +32,52 @@
         <div id="box-top" class="info-box"></div>
         <div id="box-mitte" class="info-box"></div>
         <div class="info-top"></div>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur autem corporis dignissimos eligendi ex
-        exercitationem non numquam obcaecati rerum saepe. Cupiditate ipsa ipsum mollitia nobis nostrum perspiciatis
-        quibusdam quod unde. A accusamus aperiam atque consectetur cum cumque dolores eum ipsam magnam, nisi quo
-        recusandae reiciendis saepe suscipit ullam velit veniam.
+        <ol>
+            <li>
+                Erst wen das Element komplett im Viewport ist, wird das Element animiert.
+            </li>
+            <li>
+                wen top kleiner ist als die gesamthöhe minus der box höhe, dann ist die box komplett im viewport ausser box bottom ist kleiner gleich als 0<li>
+                Die Animatin findet innerhal der Section statt, in der sich das Element befindet(Prozent siehe rechts)
+            </li>
+            <li>
+                Die Strecke ist der Abstand des Element zum unteren Rand der Section.
+            </li>
+            <li>
+                offsetTop = ist der computeStyle Wert vom Elemnent top<br/>
+                Höhe Section - Höhe Element + offsetTop = Strecke
+            </li>
+        </ol>
+        <div class="info-bottom"></div>
+        <div id="box-bottom" class="info-box"></div>
+    </div
+</section>
+<section class="grp">
+    <div class="info">Info</div>
+    <div class="grp-mem" id="videoBox">
+        <div id="box-top" class="info-box"></div>
+        <div id="box-mitte" class="info-box"></div>
+        <div class="info-top"></div>
+        <ol>
+            <li>
+                Erst wen das Element komplett im Viewport ist, wird das Element animiert.
+            </li>
+            <li>
+                wen top kleiner ist als die gesamthöhe minus der box höhe, dann ist die box komplett im viewport ausser box bottom ist kleiner gleich als 0<li>
+            Die Animatin findet innerhal der Section statt, in der sich das Element befindet(Prozent siehe rechts)
+        </li>
+            <li>
+                Die Strecke ist der Abstand des Element zum unteren Rand der Section.
+            </li>
+            <li>
+                offsetTop = ist der computeStyle Wert vom Elemnent top<br/>
+                Höhe Section - Höhe Element + offsetTop = Strecke
+            </li>
+        </ol>
         <div class="info-bottom"></div>
         <div id="box-bottom" class="info-box"></div>
     </div>
 
-</section>
-<section class="grp">
-    <div class="info">Info</div>
 </section>
 <footer>
     <p>Footer</p>
@@ -44,24 +85,40 @@
 <script>
     const progress = document.getElementById('progress');
     const totalHeight = document.body.scrollHeight - window.innerHeight;
+    const box = document.getElementById('box');
+
     window.onscroll = function () {
         const progressHeight = (window.pageYOffset / totalHeight) * 100;
         progress.innerHTML = Math.floor(progressHeight) + "%";
 
         const boxTop = document.getElementById('box-top');
-        boxTop.innerHTML = "Top: " + Math.floor(box.getBoundingClientRect().top ,2)
-            + " Weite: " + box.getBoundingClientRect().width ;
+        boxTop.innerHTML = "Top: " + Math.floor(box.getBoundingClientRect().top, 2)
+            + " Weite: " + box.getBoundingClientRect().width;
 
         const boxBottom = document.getElementById('box-bottom');
-        boxBottom.innerHTML = "Unten: " + Math.floor(box.getBoundingClientRect().bottom, 2 ) + " Höhe: " + box.getBoundingClientRect().height;
+        boxBottom.innerHTML = "Unten: " + Math.floor(box.getBoundingClientRect().bottom, 2) + " Höhe: " + box.getBoundingClientRect().height;
 
         // wen top kleiner ist als die gesamthöhe minus der box höhe, dann ist die box komplett im viewport ausser box bottom ist kleiner gleich als 0
 
-        let ganz = (box.getBoundingClientRect().top - (window.innerHeight - box.getBoundingClientRect().height)<0) && ( box.getBoundingClientRect().top >= 0)
+        let ganz = (box.getBoundingClientRect().top - (window.innerHeight - box.getBoundingClientRect().height) < 0) && (box.getBoundingClientRect().top >= 0)
         let test = ganz ? "ganz" : "nicht ganz";
         const boxMitte = document.getElementById('box-mitte');
         boxMitte.innerHTML = `sichtbare ${test}`;
+        let transformY = (window.pageYOffset / totalHeight) * 100 - 100;
+        if (ganz) {
+            box.style.top = `${transformY}px`;
+        }
     }
+    const element = document.getElementById('box2');
+    window.addEventListener('scroll', () => {
+        // Calculate the translation percentage based on scroll position
+        const scrollPosition = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const translationPercentage = (scrollPosition / windowHeight) * 100;
+
+        // Apply the translation to the element's style
+        element.style.transform = `translateY(-${translationPercentage}%)`;
+    });
 
     const generateSteps = () => {
         const steps = [];
@@ -79,15 +136,14 @@
         const progressHeight = (window.pageYOffset / totalHeight) * 100;
         let info = entry.target.querySelector('.info')
 
-        let infoText = `isIntersecting: ${entry.isIntersecting}`+
-            `<br> Gesamt: ${Math.floor(progressHeight,2)}`+`<br> Höhe Viewport: ${document.documentElement.clientHeight}`+
-            `<br> Höhe Section: ${entry.boundingClientRect.height}`+
-            `<br>top: ${entry.boundingClientRect.top}`+
+        let infoText = `isIntersecting: ${entry.isIntersecting}` +
+            `<br> Gesamt: ${Math.floor(progressHeight, 2)}` + `<br> Höhe Viewport: ${document.documentElement.clientHeight}` +
+            `<br> Höhe Section: ${entry.boundingClientRect.height}` +
+            `<br>top: ${entry.boundingClientRect.top}` +
             `<br> Prozent: ${percentage.toFixed(2)}%`;
         info.innerHTML = infoText;
     }
 
-    const box = document.getElementById('box');
 
     const rootConfig = {
         root: null,
@@ -100,7 +156,7 @@
         entries.forEach(function (entry) {
             generateInfo(entry);
             const boxMitte = document.getElementById('box-mitte');
-            const scroll ="start";
+            const scroll = "start";
 
             if (entry.isIntersecting && isTrigger(entry.target, 'video')) {
                 entry.target.classList.add('active');
@@ -125,12 +181,12 @@
         autoplay: true
     });
 
-/*
-    animation.seek((scrollPercent / 100) * animation.duration);
-    var seekProgressEl = document.querySelector('.seek-anim-demo .progress');
-    seekProgressEl.oninput = function() {
-        animation.seek(animation.duration * (seekProgressEl.value / 100));
-    };*/
+    /*
+        animation.seek((scrollPercent / 100) * animation.duration);
+        var seekProgressEl = document.querySelector('.seek-anim-demo .progress');
+        seekProgressEl.oninput = function() {
+            animation.seek(animation.duration * (seekProgressEl.value / 100));
+        };*/
 </script>
 </body>
 </html>
