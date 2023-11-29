@@ -1,0 +1,84 @@
++<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VideoScroller</title>
+    <link rel="stylesheet" href="index.css" type="text/css" media="screen"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
+            integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<header>
+    <h1>Scroll Prozent</h1>
+    <div id="progress">0%</div>
+</header>
+<nav>
+    <div class="output"></div>
+</nav>
+<section class="grp">
+    <div class="info">Info</div>
+</section>
+<section class="grp video" id="example">
+    <div class="info">Info</div>
+    <div class="grp-mem videobox" id="box">
+        <div id="box-top" class="info-box"></div>
+        <div id="box-mitte" class="info-box"></div>
+        <div class="info-top"></div>
+        <ol>
+            <li>
+                Erst wen das Element komplett im Viewport ist, wird das Element animiert.
+            </li>
+            <li>
+                Die Animatin findet innerhal der Section statt, in der sich das Element befindet(Prozent siehe rechts)
+            </li>
+            <li>
+                Die Strecke ist der Abstand des Element zum unteren Rand der Section.
+            </li>
+            <li>
+                offsetTop = ist der computeStyle Wert vom Element top<br/>
+                Höhe Section - Höhe Element + offsetTop = Strecke
+            </li>
+            <li>Bsp: Hohe Section = 411.5 - Höhe Element= 294 + offsetTop = 100px <br/>
+                411.5 - 294 + 100 = 217.5px
+            </li>
+        </ol>
+        <div class="info-bottom"></div>
+        <div id="box-bottom" class="info-box"></div>
+    </div>
+</section>
+<section class="grp">
+    <div class="info">Info</div>
+</section>
+<footer>
+    <p>Footer</p>
+</footer>
+<script>
+    const divAnimation = anime({
+        targets: '.videobox',
+        scale: 0,
+        translateX: [0, 0, 0, 0],
+        top: 600,
+        elasticity: 200,
+        easing: 'easeInOutCubic',
+        autoplay: false,
+        opacity: 0.7
+    });
+
+    const scrollPercent = () => {
+        const bodyST = document.body.scrollTop;
+        const docST = document.documentElement.scrollTop;
+        const docSH = document.documentElement.scrollHeight;
+        const docCH = document.documentElement.clientHeight;
+        return (docST + bodyST) / (docSH - docCH) * 100
+    }
+    /**
+     * Add a scroll listener on the window object to
+     * control animations based on scroll percentage.
+     */
+    window.onscroll = () => {
+        divAnimation.seek((scrollPercent() / 100) * divAnimation.duration);
+    };s
+</script>
+</body>
+</html>

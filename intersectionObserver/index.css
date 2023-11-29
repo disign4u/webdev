@@ -12,11 +12,25 @@ footer {
   align-items: center;
   flex-direction: column;
 }
+#progress {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 25px;
+  background: lightgreen;
+  transition: width 0.5s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
 #example {
   position: relative;
   z-index: 10;
   height: auto;
-  min-height: 50vh;
+  min-height: 80vh;
 }
 #box-top {
   position: absolute;
@@ -52,13 +66,13 @@ footer {
 #box-mitte {
   position: absolute;
   z-index: 10;
-  left: 50%;
+  right: 0;
   top: 50%;
-  transform: translate(-50%, -50%);
-  width: 200px;
+  transform: translate(100%, -50%);
+  width: 150px;
   height: 20px;
   background: black;
-  border-radius: 5px;
+  border-radius: 0 5px 5px 0;
   font-size: 14px;
   color: yellow;
   display: inline-flex;
@@ -138,5 +152,10 @@ nav {
   width: 320px;
   padding: 20px;
   color: #aaa;
+}
+#video {
+  transform: translateY(var(--ty));
+  transition: transform 0.1s linear;
+  will-change: transform;
 }
 /*# sourceMappingURL=index.css.map */
