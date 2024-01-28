@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Liste Filtern</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .flex {
+            display: flex;
+            flex-wrap:wrap;
+            gap:10px;
+        }
+        .room-container {
+            border:1px solid;
+            border:radius;
+            flex:1 1 40%;
+            padding:10%;
+            box-sizing: border-box;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            animation: scale-up 1s forwards;
+        }
+        .visuallyhidden {
+            display: none;
+        }
+
+        @keyframes scale-down {
+          0% {
+            transform: scale(1);
+          }
+          100% {
+            transform: scale(0);
+          }
+        }
+        @keyframes scale-up {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <div class="item">
+        <h3>Filtern nach</h3>
+        <ul class="reset">
+            <li class="sm:whitespace-nowrap">
+                <label class="form-label">
+                    <input class="form-input"
+                           data-filter-option="filterby" value="49" name="filterby-49" id="filterby-49"
+                           type="checkbox" data-gtm-form-interact-field-id="1">&nbsp;Doppelzimmer
+                </label></li>
+            <li class="sm:whitespace-nowrap">
+                <label class="form-label">
+                    <input class="form-input"
+                           data-filter-test="blubber"
+                           data-filter-option="filterby" value="5"
+                           name="filterby-5" id="filterby-5"
+                           type="checkbox">&nbsp;2-Raum-Appartements
+                </label>
+            </li>
+            <li class="sm:whitespace-nowrap">
+                <label class="form-label">
+                    <input class="form-input"
+                           data-filter-option="filterby" value="6"
+                           name="filterby-6" id="filterby-6"
+                           type="checkbox">&nbsp;3-Raum-Appartements
+                </label>
+            </li>
+            <li class="sm:whitespace-nowrap">
+                <label class="form-label">
+                    <input class="form-input"
+                           data-filter-option="filterby" value="7"
+                           name="filterby-7" id="filterby-7"
+                           type="checkbox">&nbsp;4-Raum-Appartements
+                </label>
+            </li>
+        </ul>
+    </div>
+    <div class="item">
+        <h3>Sortieren nach</h3>
+        <select class="form-input form-input-rooms"
+                name="sortby" id="sortby" data-filter-option="sortby" data-gtm-form-interact-field-id="0">
+            <option value="nosort" selected="">Keine Sortierung</option>
+            <option value="price:lower">Preis aufwärts</option>
+            <option value="price:higher">Preis abwärts</option>
+        </select><br>
+        <label class="form-label">
+            <input class="form-input" type="checkbox"
+                   data-filter-option="popular" name="sortbypopular" id="sortbypopular">
+            <span>Beliebteste vorreihen</span>
+        </label>
+    </div>
+</nav>
+
+<section data-filter-results="rooms" class="flex">
+    <div class="room-container js-room"
+         data-room="8"
+         data-filter-item=""
+         data-filter-popular="0"
+         data-filter-by="49"
+         data-filter-sort-val="152">
+        152
+    </div>
+    <div class="room-container js-room"
+         data-room="9"
+         data-filter-item=""
+         data-filter-popular="0"
+         data-filter-by="49"
+         data-filter-sort-val="163">
+        163
+    </div>
+    <div class="room-container js-room"
+         data-room="10"
+         data-filter-item=""
+         data-filter-popular="0"
+         data-filter-by="5"
+         data-filter-sort-val="172">
+        172
+    </div>
+    <div class="room-container js-room"
+         data-room="11"
+         data-filter-item=""
+         data-filter-popular="0"
+         data-filter-by="5"
+         data-filter-sort-val="184">
+        184
+    </div>
+    <div class="room-container js-room"
+         data-room="12"
+         data-filter-item=""
+         data-filter-popular="1"
+         data-filter-by="6"
+         data-filter-sort-val="189">
+        189
+    </div>
+    <div class="room-container js-room"
+         data-room="13"
+         data-filter-item=""
+         data-filter-popular="1"
+         data-filter-by="6"
+         data-filter-sort-val="200">
+        200
+    </div>
+    <div class="room-container js-room"
+         data-room="14"
+         data-filter-item=""
+         data-filter-popular="0"
+         data-filter-by="6"
+         data-filter-sort-val="200">
+        200
+    </div>
+    <div class="room-container js-room"
+         data-room="15"
+         data-filter-item=""
+         data-filter-popular="1"
+         data-filter-by="6"
+         data-filter-sort-val="203">
+        203
+    </div>
+    <div class="room-container js-room"
+         data-room="16"
+         data-filter-item=""
+         data-filter-popular="1"
+         data-filter-by="6"
+         data-filter-sort-val="209">
+        209
+    </div>
+    <div class="room-container js-room"
+         data-room="17"
+         data-filter-item=""
+         data-filter-popular="0"
+         data-filter-by="6"
+         data-filter-sort-val="184">
+        184
+    </div>
+    <div class="room-container js-room"
+         data-room="18"
+         data-filter-item=""
+         data-filter-popular="1"
+         data-filter-by="7"
+         data-filter-sort-val="200">
+        200
+    </div>
+</section>
+
+<script src="liste-doppel-filtern-org.js"></script>
+<a href="https://www.feldberger-hof.de/kinderhotel-schwarzwald/zimmer-preise" target="_blank">
+    https://www.feldberger-hof.de/kinderhotel-schwarzwald/zimmer-preise
+</a>
+</body>
+</html>
